@@ -1,0 +1,49 @@
+{
+    "ret": true,
+    "data": {
+        "total":32,
+        "totalPage":4,
+        "taskListByProcessId": {
+          "data": []
+        },
+        "selectById": {
+          "data": []
+        },
+        "resourceList": {
+          "data": []
+        },
+        "processList": {
+          "data": []
+        },
+        "queryProjectList": {
+          "data": []
+        },
+        "jarList": {
+          "data": []
+        },
+        "allGroup": {
+          "data": []
+        },
+        "tenantList": {
+          "data": []
+        },
+        "selectByIdInstance": {
+          "data": []
+        },
+        "viewTree": {
+          "data": []
+        },
+        "viewGantt": {
+          "data": []
+        },
+        "notifyGroupList": {
+          "data": []
+        },
+        "logList": {
+          "data": []
+        },
+        "taskInstanceList": {
+          "data": []
+        }
+    }
+  }

@@ -1,0 +1,135 @@
+@import './var.less';
+//输入框等form
+.el-form-item__label{
+	font-size: .14rem;//14px
+}
+.el-form-item--mini .el-form-item__label{
+	line-height: auto;
+}
+.el-form-item--mini.el-form-item{
+	margin-bottom: .15rem;
+}
+//表格
+.el-table tbody tr:hover>td { 
+    background-color:inherit !important
+}
+.el-table{
+	font-size: .14rem;//14px
+	background-color: inherit;
+}
+.el-table th{
+	text-align: center;
+	font-weight: 400;
+	color: #333333;
+}
+.el-table td div{
+	text-align: center;
+	font-size: .14rem;//14px
+}
+.el-button--mini, .el-button--small{
+	font-size: .14rem;//14px
+}
+
+  .el-switch__core{
+    width:.44rem !important;
+    height:.2rem;
+    /*color:#409EFF;*/
+  }
+  /*设置圆*/
+.el-switch__core::after{
+    width:.18rem;
+    height:.18rem;
+	margin-top: -.02rem;
+	// top: auto;
+  }
+  .el-switch.is-checked .el-switch__core::after{
+	margin-left: -.19rem;
+	margin-top: -0.02rem;
+  }
+  //分页样式
+  .el-pagination{
+	text-align: right;
+	color: #595959;
+	font-weight: 300;
+	.el-select{
+		.el-input{
+			.el-input__inner{
+				border-radius: 6px;
+				color: #595959;
+				font-weight: 300;
+			}
+		}
+	}
+	button{
+		padding: 0 4px;
+		min-width: 28px;
+		height: 28px;
+		line-height: 28px;
+		border: 1px solid #d9d9d9;
+		border-radius: 6px;
+	}
+	.btn-prev{
+		padding-right: inherit;
+		.el-icon{
+			font-weight: 300;
+		}
+	}
+	.btn-next{
+		margin-left: 6px;
+		padding-left: inherit;
+		.el-icon{
+			font-weight: 300;
+		}
+	}
+	.el-pagination__jump{
+		color: #595959;
+		font-weight: 300;
+		.el-input__inner{
+			color: #595959;
+			font-weight: 300;
+		}
+	}
+	.el-pager{
+		li {
+			padding: 0 4px;
+			min-width: 28px;
+			height: 28px;
+			margin-left: 6px;
+			line-height: 28px;
+			border: 1px solid #d9d9d9;
+			border-radius: 6px;
+			
+		}
+		li.active+li{
+			border-left: 1px solid #d9d9d9;
+			font-weight: 300;
+		}
+		.active{
+			color: #ffffff;
+			background: #409EFF;
+		}
+	  }
+	 
+  } 
+  .el-scrollbar{
+	  .el-select-dropdown__item{
+		color: #595959;
+		font-weight: 300;
+		font-size: .14rem;
+	  } 
+	  .el-select-dropdown__item.selected{
+		color: #409EFF;
+	  }
+  }
+  //message弹出窗
+  .el-message__icon{
+	  font-size: .3rem;
+  }
+  //加载中
+  .el-icon-loading{
+	  font-size: 30px;
+  }
+  //radio单选框
+  .el-radio__label{
+	  font-size: .14rem;
+  }

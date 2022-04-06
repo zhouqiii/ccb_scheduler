@@ -1,0 +1,80 @@
+@import './mixin.less';
+@import './var.less';
+
+// reset
+html,
+body{
+	font-family: PingFang-SC-Heavy, PingFangSC-Regular, PingFang SC;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: none;
+	-webkit-overflow-scrolling: touch;
+	color: @gray333;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: inherit;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+div,p{
+	box-sizing: border-box;
+}
+
+/* 适配ios9和ios10的状态栏，另外需要ios客户端设置
+self.automaticallyAdjustsScrollViewInsets = NO */
+.ios-padding-top{
+    padding-top: 20px;
+}
+
+// bottom fixed
+.bottom-fixed{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 24px 32px;
+	background-color: @white;
+}
+.flex-row-around{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-around;
+	align-items: center;
+}
+.flex-row-between{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
+	align-items: center;
+}
+.flex-row-evenly{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-evenly;
+	align-items: center;
+}
+.flex-row-start{
+	display: flex;
+	flex-direction: row;
+	justify-content:flex-start;
+	align-items: center;
+}
+.box{
+    padding: .1rem;
+}
