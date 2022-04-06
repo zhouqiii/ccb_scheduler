@@ -22,7 +22,7 @@
       <el-form-item label="复制文本">
         <el-input v-model="copyMessage" class="name" placeholder="你可以ctrl+v把内容复制到这里"></el-input>
       </el-form-item>
-      <el-form-item label="脚本">
+      <el-form-item label="脚本" class="form-mirror">
         <div :style="scriptStyle">
           <textarea
             :disabled="isDetails"
@@ -30,28 +30,50 @@
             name="code-shell-mirror"
             style="opacity: 0"
           ></textarea>
-          <el-icon size="16" color="#409EFC">
-            <edit />
-          </el-icon>
+         <i class="el-icon-rank" @click="setFullScreen"></i>
         </div>
       </el-form-item>
     </el-form>
+    <el-dialog
+      :visible.sync="dialogVisible"
+      :width="scriptWidth"
+      top="100"
+      :show-close="false"
+      :destroy-on-close="true"
+    >
+      <div slot="title">
+        <i class="el-icon-full-screen" @click="dialogVisible = false"></i>
+      </div>
+      <script-box :item="rawScript" @getSriptBoxValue="getSriptBoxValue"></script-box>
+      <span slot="footer" class="dialog-footer">
+        <!-- <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button> -->
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
+import $ from 'jquery';
 import Clipboard from 'clipboard';
+import codemirror from '../utils/codemirror';
+// eslint-disable-next-line import/no-cycle
+import disabledState from '../components/Dag/module/mixin/disabledState';
 
+let editor;
 export default {
   name: 'clipboard',
   data() {
     return {
-      scriptStyle: 'width: 500px;display: flex',
+      scriptStyle: 'width: calc(100% - 100px);display: flex',
+      scriptWidth: ($(window).width() - 40).toString(),
       form: {},
       message: 'message',
       copyMessage: '',
-      isDetails: false,
+      dialogVisible: false,
+      rawScript: '',
     };
   },
+  mixins: [disabledState],
   methods: {
     copyName() {
       const copyText = document.getElementById('copy-name');
@@ -70,7 +92,92 @@ export default {
         clipboard.destroy();
       });
     },
+    handlerEditor() {
+      // editor
+      editor = codemirror('code-shell-mirror', {
+        mode: 'shell',
+        readOnly: this.isDetails,
+      });
+      this.keypress = () => {
+        if (!editor.getOption('readOnly')) {
+          editor.showHint({
+            completeSingle: false,
+            extraKeys: {
+              Enter: '',
+            },
+          });
+        }
+      };
+      // Monitor keyboard
+      editor.on('keypress', this.keypress);
+      editor.setValue(this.rawScript);
+      return editor;
+    },
+    setFullScreen() {
+      this.rawScript = editor.getValue();
+      this.dialogVisible = true;
+    },
+    getSriptBoxValue(val) {
+      editor.setValue(val);
+    },
   },
   created() {},
+  mounted() {
+    setTimeout(() => {
+      this.handlerEditor();
+    }, 200);
+  },
+  destroyed() {
+    if (editor) {
+      editor.toTextArea(); // Uninstall
+      editor.off($('.code-shell-mirror'), 'keypress', this.keypress);
+    }
+  },
 };
 </script>
+<style lang="less" scoped>
+.form-mirror {
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  /deep/.CodeMirror {
+    width: 100%;
+    height:auto;
+    min-height: 72px;
+    border: 1px solid #ddd !important;
+    border-radius: 3px;
+  }
+  /deep/.CodeMirror-scroll {
+    height:calc(50vh - 50px);
+    min-height: 72px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    .CodeMirror-sizer{
+      margin-left: 33px !important;
+      margin-bottom: -17px;
+      border-right-width: 33px !important;
+      min-height: 28px !important;
+      min-width: 35px !important;
+      padding-right: 0px !important;
+      padding-bottom: 0px !important;
+      .CodeMirror-code{
+        .CodeMirror-line{
+          line-height: 20px;
+        }
+        .CodeMirror-linenumber{
+          height: 20px;
+          line-height: 20px;
+        }
+      }
+    }
+    .CodeMirror-gutters{
+      background: #f8f8f8;
+      color: #333;
+      border-left: 0 !important;
+      .CodeMirror-linenumbers{
+        width: 32px !important;
+      }
+    }
+  }
+}
+</style>

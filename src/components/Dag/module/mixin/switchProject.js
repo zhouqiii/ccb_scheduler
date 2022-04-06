@@ -1,16 +1,14 @@
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 // import { beforeProjectRoute } from '@/module/project/router'
 
 export default {
   computed: {
-    ...mapState('dag', ['projectId', 'projectName'])
+    ...mapState('dag', ['projectId', 'projectName']),
   },
   watch: {
-    projectId () {
-      typeof this._updateProject === 'function' && this._updateProject()
-    }
+    projectId() {},
   },
   // beforeRouteUpdate (to, from, next) {
   //   beforeProjectRoute(to, from, next)
   // }
-}
+};
