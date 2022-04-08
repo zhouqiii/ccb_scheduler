@@ -12,10 +12,11 @@ import 'codemirror/theme/mdn-like.css';
 import 'codemirror/addon/hint/show-hint.css';
 
 export default (id, o) => {
-  CodeMirror.fromTextArea(document.getElementById(id), {
+  // eslint-disable-next-line prefer-object-spread
+  const obj = Object.assign({
     lineNumbers: true,
     theme: 'mdn-like',
     readOnly: true,
-    ...o,
-  });
+  }, {}, o);
+  return CodeMirror.fromTextArea(document.getElementById(id), obj);
 };

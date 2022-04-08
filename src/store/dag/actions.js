@@ -1,7 +1,9 @@
-import _ from 'lodash'
-import request from '../../utils/request'
-import { tasksState } from '../../components/Dag/config'
-import json from './mock/index.json'
+/* eslint-disable no-unused-vars */
+import _ from 'lodash';
+// import request from '../../utils/request';
+import { tasksState } from '../../components/Dag/config';
+import json from '../../mock/index.json';
+
 const {
   taskListByProcessId,
   selectById,
@@ -16,33 +18,33 @@ const {
   viewGantt,
   notifyGroupList,
   logList,
-  taskInstanceList
-} = json.data
+  taskInstanceList,
+} = json.data;
 
 // delete 'definitionList' from tasks
 const deleteDefinitionList = (tasks) => {
   const newTasks = [];
-  tasks.forEach(item => {
-    const newItem = Object.assign({}, item);
-    if(newItem.dependence && newItem.dependence.dependTaskList) {
-      newItem.dependence.dependTaskList.forEach(dependTaskItem => {
+  tasks.forEach((item) => {
+    const newItem = { ...item };
+    if (newItem.dependence && newItem.dependence.dependTaskList) {
+      newItem.dependence.dependTaskList.forEach((dependTaskItem) => {
         if (dependTaskItem.dependItemList) {
-          dependTaskItem.dependItemList.forEach(dependItem => {
+          dependTaskItem.dependItemList.forEach((dependItem) => {
             Reflect.deleteProperty(dependItem, 'definitionList');
-          })
+          });
         }
-      })
+      });
     }
     newTasks.push(newItem);
   });
   return newTasks;
-}
+};
 
 export default {
   /**
    *  Task status acquisition
    */
-  getTaskState ({ state }, payload) {
+  getTaskState({ state }, payload) {
     return new Promise((resolve, reject) => {
       // io.get(`projects/${state.projectName}/instance/task-list-by-process-id`, {
       //   processInstanceId: payload
@@ -62,140 +64,138 @@ export default {
       // }).catch(e => {
       //   reject(e)
       // })
-        const arr = _.map(taskListByProcessId.data.taskList, v => {
-          return _.cloneDeep(_.assign(tasksState[v.state], {
-            name: v.name,
-            stateId: v.id,
-            dependentResult: v.dependentResult
-          }))
-        })
-        resolve({
-          list: arr,
-          processInstanceState: taskListByProcessId.data.processInstanceState,
-          taskList: taskListByProcessId.data.taskList
-        })
-    })
+      const arr = _.map(taskListByProcessId.data.taskList, (v) => {
+        _.cloneDeep(_.assign(tasksState[v.state], {
+          name: v.name,
+          stateId: v.id,
+          dependentResult: v.dependentResult,
+        }));
+      });
+      resolve({
+        list: arr,
+        processInstanceState: taskListByProcessId.data.processInstanceState,
+        taskList: taskListByProcessId.data.taskList,
+      });
+    });
   },
   /**
    * Verify that the DGA map name exists
    */
-  verifDAGName ({ state }, payload) {
+  verifDAGName({ state }, payload) {
     return new Promise((resolve, reject) => {
-      state.name = payload
-      resolve({ msg: '成功' })
-    })
+      state.name = payload;
+      resolve({ msg: '成功' });
+    });
   },
 
   /**
    * Get process definition DAG diagram details
    */
-  getProcessDetails ({ state }, payload) {
+  getProcessDetails({ state }, payload) {
     return new Promise((resolve, reject) => {
-      state.name = selectById.data.name
+      state.name = selectById.data.name;
       // description
-      state.description = selectById.data.description
+      state.description = selectById.data.description;
       // connects
-      state.connects = JSON.parse(selectById.data.connects)
+      state.connects = JSON.parse(selectById.data.connects);
       // locations
-      state.locations = JSON.parse(selectById.data.locations)
+      state.locations = JSON.parse(selectById.data.locations);
       // Process definition
-      const processDefinitionJson = JSON.parse(selectById.data.processDefinitionJson)
+      const processDefinitionJson = JSON.parse(selectById.data.processDefinitionJson);
       // tasks info
-      state.tasks = processDefinitionJson.tasks
+      state.tasks = processDefinitionJson.tasks;
       // tasks cache
-      state.cacheTasks = {}
-      processDefinitionJson.tasks.forEach(v => {
-        state.cacheTasks[v.id] = v
-      })
+      state.cacheTasks = {};
+      processDefinitionJson.tasks.forEach((v) => {
+        state.cacheTasks[v.id] = v;
+      });
       // global params
-      state.globalParams = processDefinitionJson.globalParams
+      state.globalParams = processDefinitionJson.globalParams;
       // timeout
-      state.timeout = processDefinitionJson.timeout
-
-      state.tenantId = processDefinitionJson.tenantId
-      resolve(selectById.data)
-    })
+      state.timeout = processDefinitionJson.timeout;
+      state.tenantId = processDefinitionJson.tenantId;
+      resolve(selectById.data);
+    });
   },
 
   /**
    * Get the process instance DAG diagram details
    */
-  getInstancedetail ({ state }, payload) {
+  getInstancedetail({ state }, payload) {
     return new Promise((resolve, reject) => {
       // name
-      state.name = selectByIdInstance.data.name
+      state.name = selectByIdInstance.data.name;
       // desc
-      state.description = selectByIdInstance.data.description
+      state.description = selectByIdInstance.data.description;
       // connects
-      state.connects = JSON.parse(selectByIdInstance.data.connects)
+      state.connects = JSON.parse(selectByIdInstance.data.connects);
       // locations
-      state.locations = JSON.parse(selectByIdInstance.data.locations)
+      state.locations = JSON.parse(selectByIdInstance.data.locations);
       // process instance
-      const processInstanceJson = JSON.parse(selectByIdInstance.data.processInstanceJson)
+      const processInstanceJson = JSON.parse(selectByIdInstance.data.processInstanceJson);
       // tasks info
-      state.tasks = processInstanceJson.tasks
+      state.tasks = processInstanceJson.tasks;
       // tasks cache
-      state.cacheTasks = {}
-      processInstanceJson.tasks.forEach(v => {
-        state.cacheTasks[v.id] = v
-      })
+      state.cacheTasks = {};
+      processInstanceJson.tasks.forEach((v) => {
+        state.cacheTasks[v.id] = v;
+      });
       // global params
-      state.globalParams = processInstanceJson.globalParams
+      state.globalParams = processInstanceJson.globalParams;
       // timeout
-      state.timeout = processInstanceJson.timeout
-      state.tenantId = processInstanceJson.tenantId
+      state.timeout = processInstanceJson.timeout;
+      state.tenantId = processInstanceJson.tenantId;
       // startup parameters
-      state.startup = _.assign(state.startup, _.pick(selectByIdInstance.data, ['commandType', 'failureStrategy', 'processInstancePriority', 'workerGroup', 'warningType', 'warningGroupId', 'receivers', 'receiversCc']))
-      state.startup.commandParam = JSON.parse(selectByIdInstance.data.commandParam)
-
-      resolve(selectByIdInstance.data)
-    })
+      state.startup = _.assign(state.startup, _.pick(selectByIdInstance.data, ['commandType', 'failureStrategy', 'processInstancePriority', 'workerGroup', 'warningType', 'warningGroupId', 'receivers', 'receiversCc']));
+      state.startup.commandParam = JSON.parse(selectByIdInstance.data.commandParam);
+      resolve(selectByIdInstance.data);
+    });
   },
   /**
    * Get a list of process definitions (sub-workflow usage is not paged)
    */
-  getProcessList ({ state }, payload) {
+  getProcessList({ state }, payload) {
     return new Promise((resolve, reject) => {
       if (state.processListS.length) {
-        resolve()
-        return
+        resolve();
+        return;
       }
-      state.processListS = processList.data
-      resolve(processList.data)
-    })
+      state.processListS = processList.data;
+      resolve(processList.data);
+    });
   },
   /**
    * Get a list of project
    */
-  getProjectList ({ state }, payload) {
+  getProjectList({ state }, payload) {
     return new Promise((resolve, reject) => {
       if (state.projectListS.length) {
-        resolve()
-        return
+        resolve();
+        return;
       }
-      state.projectListS = queryProjectList.data
-      resolve(queryProjectList.data)
-    })
+      state.projectListS = queryProjectList.data;
+      resolve(queryProjectList.data);
+    });
   },
   /**
    * Called before the process definition starts
    */
-  getStartCheck ({ state }, payload) {
+  getStartCheck({ state }, payload) {
     return new Promise((resolve, reject) => {
-      resolve({ msg: '成功' })
-    })
+      resolve({ msg: '成功' });
+    });
   },
   /**
    * get resources
    */
-  getResourcesList ({ state }) {
+  getResourcesList({ state }) {
     return new Promise((resolve, reject) => {
       if (state.resourcesListS.length) {
-        resolve()
-        return
+        resolve();
+        return;
       }
-      state.resourcesListS = resourceList.data
-      resolve(resourceList.data)
+      state.resourcesListS = resourceList.data;
+      resolve(resourceList.data);
       // io.get('resources/list', {
       //   type: 'FILE'
       // }, res => {
@@ -204,125 +204,122 @@ export default {
       // }).catch(res => {
       //   reject(res)
       // })
-    })
+    });
   },
   /**
    * get jar
    */
-  getResourcesListJar ({ state }, payload) {
+  getResourcesListJar({ state }, payload) {
     return new Promise((resolve, reject) => {
       if (state.resourcesListJar.length) {
-        resolve()
-        return
+        resolve();
+        return;
       }
-      if(payload) {
-        state.resourcesListPy = jarList.data
+      if (payload) {
+        state.resourcesListPy = jarList.data;
       } else {
-        state.resourcesListJar = jarList.data
+        state.resourcesListJar = jarList.data;
       }
-      resolve(jarList.data)
-    })
+      resolve(jarList.data);
+    });
   },
   /**
    * get worker groups all
    */
-  getWorkerGroupsAll ({ state }, payload) {
+  getWorkerGroupsAll({ state }, payload) {
     return new Promise((resolve, reject) => {
-      let list = allGroup.data
+      let list = allGroup.data;
       if (list.length > 0) {
-        list = list.map(item => {
-          return {
-            id: item,
-            name: item
-          }
-        })
+        list = list.map((item) => ({
+          id: item,
+          name: item,
+        }));
       } else {
         list.unshift({
           id: 'default',
-          name: 'default'
-        })
+          name: 'default',
+        });
       }
-      state.workerGroupsListAll = list
-      resolve(list)
-    })
+      state.workerGroupsListAll = list;
+      resolve(list);
+    });
   },
   /**
    * Tenant list - no paging
    */
-  getTenantList ({ state }, payload) {
+  getTenantList({ state }, payload) {
     return new Promise((resolve, reject) => {
-      const list = tenantList.data
-      let result = list.some(item => {
-        if(item.id === -1) {
-          return true
+      const list = tenantList.data;
+      const result = list.some((item) => {
+        if (item.id === -1) {
+          return true;
         }
-      })
-      if(!result) {
+        return false;
+      });
+      if (!result) {
         list.unshift({
           id: -1,
-          tenantName: 'default'
-        })
+          tenantName: 'default',
+        });
       }
-      state.tenantAllList = list
-      resolve(list)
-    })
+      state.tenantAllList = list;
+      resolve(list);
+    });
   },
   /**
    * tree chart
    */
-  getViewTree ({ state }, payload) {
+  getViewTree({ state }, payload) {
     return new Promise((resolve, reject) => {
-      resolve(viewTree.data)
-    })
+      resolve(viewTree.data);
+    });
   },
 
   /**
    * gantt chart
    */
-  getViewGantt ({ state }, payload) {
+  getViewGantt({ state }, payload) {
     return new Promise((resolve, reject) => {
-      resolve(viewGantt.data)
-    })
+      resolve(viewGantt.data);
+    });
   },
   /**
    * Get alarm list
    */
-  getNotifyGroupList ({ state }, payload) {
+  getNotifyGroupList({ state }, payload) {
     return new Promise((resolve, reject) => {
-      state.notifyGroupListS = _.map(notifyGroupList.data, v => {
-        return {
-          id: v.id,
-          code: v.groupName,
-          disabled: false
-        }
-      })
-      resolve(_.cloneDeep(state.notifyGroupListS))
-    })
+      state.notifyGroupListS = _.map(notifyGroupList.data, (v) => ({
+        id: v.id,
+        code: v.groupName,
+        disabled: false,
+      }));
+      resolve(_.cloneDeep(state.notifyGroupListS));
+    });
   },
 
   /**
    * Process definition startup interface
    */
-  processStart ({ state }, payload) {
+  processStart({ state }, payload) {
     return new Promise((resolve, reject) => {
-      resolve({msg: '成功'})
-    })
+      resolve({ msg: '成功' });
+    });
   },
   /**
    * View log
    */
-  getLog ({ state }, payload) {
+  getLog({ state }, payload) {
     return new Promise((resolve, reject) => {
-      resolve(logList)
-    })
+      resolve(logList);
+    });
   },
   /**
    * Query task instance list
    */
-  getTaskInstanceList ({ state }, payload) {
+  getTaskInstanceList({ state }, payload) {
     return new Promise((resolve, reject) => {
-      resolve(taskInstanceList.data)
-    })
+      resolve(taskInstanceList.data);
+    });
   },
 
 //   /**
@@ -467,7 +464,8 @@ export default {
 //    */
 //   getProcessByProjectId ({ state }, payload) {
 //     return new Promise((resolve, reject) => {
-//       io.get(`projects/${state.projectName}/process/queryProcessDefinitionAllByProjectId`, payload, res => {
+//       io.get(`projects/${state.projectName}/process/queryProcessDefinitionAllByProjectId`,
+//  payload, res => {
 //         resolve(res.data)
 //       }).catch(res => {
 //         reject(res)
@@ -664,7 +662,8 @@ export default {
 //       }
 //     }
 //
-//     io.get(`projects/${state.projectName}/process/export`, {processDefinitionIds: payload.processDefinitionIds}, res => {
+//     io.get(`projects/${state.projectName}/process/export`,
+// {processDefinitionIds: payload.processDefinitionIds}, res => {
 //       downloadBlob(res, payload.fileName)
 //     }, e => {
 //
@@ -777,4 +776,4 @@ export default {
 //       })
 //     })
 //   }
-}
+};

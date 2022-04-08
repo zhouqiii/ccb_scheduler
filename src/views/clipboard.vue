@@ -37,14 +37,14 @@
     <el-dialog
       :visible.sync="dialogVisible"
       :width="scriptWidth"
-      top="100"
+      top="50px"
       :show-close="false"
       :destroy-on-close="true"
     >
       <div slot="title">
-        <i class="el-icon-full-screen" @click="dialogVisible = false"></i>
+        <i class="el-icon-full-screen" @click="closeFull"></i>
       </div>
-      <script-box :item="rawScript" @getSriptBoxValue="getSriptBoxValue"></script-box>
+      <script-box :item="childRawScript" @getSriptBoxValue="getSriptBoxValue"></script-box>
       <span slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button> -->
@@ -58,19 +58,22 @@ import Clipboard from 'clipboard';
 import codemirror from '../utils/codemirror';
 // eslint-disable-next-line import/no-cycle
 import disabledState from '../components/Dag/module/mixin/disabledState';
+import ScriptBox from '../components/scriptBox.vue';
 
 let editor;
 export default {
   name: 'clipboard',
+  components: { ScriptBox },
   data() {
     return {
       scriptStyle: 'width: calc(100% - 100px);display: flex',
-      scriptWidth: ($(window).width() - 40).toString(),
+      scriptWidth: `${($(window).width() - 40)}px`,
       form: {},
       message: 'message',
       copyMessage: '',
       dialogVisible: false,
       rawScript: '',
+      childRawScript: '',
     };
   },
   mixins: [disabledState],
@@ -113,12 +116,16 @@ export default {
       editor.setValue(this.rawScript);
       return editor;
     },
+    closeFull() {
+      editor.setValue(this.rawScript);
+      this.dialogVisible = false;
+    },
     setFullScreen() {
-      this.rawScript = editor.getValue();
+      this.childRawScript = editor.getValue();
       this.dialogVisible = true;
     },
     getSriptBoxValue(val) {
-      editor.setValue(val);
+      this.rawScript = val;
     },
   },
   created() {},
@@ -128,6 +135,7 @@ export default {
     }, 200);
   },
   destroyed() {
+    // 销毁editor实例
     if (editor) {
       editor.toTextArea(); // Uninstall
       editor.off($('.code-shell-mirror'), 'keypress', this.keypress);
@@ -136,6 +144,14 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+/deep/.el-dialog__body{
+  padding: 0px;
+}
+/deep/.el-dialog__header{
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px;
+}
 .form-mirror {
   width: 100%;
   position: relative;

@@ -1,8 +1,8 @@
-import localStore from '../../components/Dag/module/util/localStorage'
+import localStore from '../../components/Dag/module/util/localStorage';
 
 // Get the project currently clicked
-const projectId = localStore.getItem('projectId')
-const projectName = localStore.getItem('projectName')
+const projectId = localStore.getItem('projectId');
+const projectName = localStore.getItem('projectName');
 
 export default {
   // name
@@ -28,7 +28,7 @@ export default {
   // Whether to edit
   isEditDag: false,
   // Current project id
-  projectId: projectId,
+  projectId,
   // Current project name
   projectName: projectName || '',
   // Whether to update the process definition
@@ -94,5 +94,5 @@ export default {
   isDetails: false,
   startup: {
 
-  }
-}
+  },
+};

@@ -10,7 +10,7 @@ export default {
     };
   },
   created() {
-    this.isDetails = this.store.state.dag.isDetails;
+    this.isDetails = store.state.dag.isDetails;
     // Permissions.getAuth() ? this.store.state.dag.isDetails : true
   },
 };
