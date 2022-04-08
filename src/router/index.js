@@ -9,6 +9,11 @@ const routes = [
     path: '/',
     component: clipboard,
   },
+  {
+    path: '/log',
+    name: 'log',
+    component: () => import(/* webpackChunkName: "logView" */ '../views/logView.vue'),
+  },
 ];
 
 const router = new VueRouter({

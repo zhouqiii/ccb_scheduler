@@ -46,7 +46,7 @@ export default {
         readOnly: this.isDetails,
       });
       // eslint-disable-next-line prefer-arrow-callback
-      editor.on('change', function () {
+      editor.on('change', () => {
         self.$emit('getSriptBoxValue', editor.getValue());
       });
       this.keypress = () => {
@@ -65,7 +65,16 @@ export default {
       return editor;
     },
   },
-  watch: {},
+  watch: {
+    item: {
+      handler(val) {
+        this.rawScript = val;
+        if (editor) {
+          editor.setValue(val);
+        }
+      },
+    },
+  },
   created() {
     const o = this.item;
     // Non-null objects represent backfill
@@ -80,7 +89,7 @@ export default {
   },
   destroyed() {
     if (editor) {
-      editor.toTextArea();// Uninstall
+      editor.toTextArea(); // Uninstall
       editor.off($('.code-shell-mirror1'), 'keypress', this.keypress);
     }
   },
@@ -88,48 +97,12 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.script-model {
-  width:100%;
-}
-.form-mirror1 {
-  /deep/.CodeMirror {
-    height: calc(70vh - 90px);
-    width: 100%;
-    min-height: 72px;
-    border: 1px solid #ddd !important;
-    border-radius: 3px;
+  .script-model {
+    width:100%;
   }
-  /deep/.CodeMirror-scroll {
-    height: calc(70vh - 90px);
-    min-height: 72px;
-    overflow-y: hidden;
-    overflow-x: auto;
-    .CodeMirror-sizer{
-      margin-left: 33px !important;
-      margin-bottom: -17px;
-      border-right-width: 33px !important;
-      min-height: 28px !important;
-      min-width: 35px !important;
-      padding-right: 0px !important;
-      padding-bottom: 0px !important;
-      .CodeMirror-code{
-        .CodeMirror-line{
-          line-height: 20px;
-        }
-        .CodeMirror-linenumber{
-          height: 20px;
-          line-height: 20px;
-        }
-      }
-    }
-    .CodeMirror-gutters{
-      background: #f8f8f8;
-      color: #333;
-      border-left: 0 !important;
-      .CodeMirror-linenumbers{
-        width: 32px !important;
-      }
+  .form-mirror1 {
+    .CodeMirror {
+      height: calc(70vh - 90px);
     }
   }
-}
 </style>

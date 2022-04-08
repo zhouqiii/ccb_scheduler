@@ -58,7 +58,7 @@ import Clipboard from 'clipboard';
 import codemirror from '../utils/codemirror';
 // eslint-disable-next-line import/no-cycle
 import disabledState from '../components/Dag/module/mixin/disabledState';
-import ScriptBox from '../components/scriptBox.vue';
+import ScriptBox from '../components/Shell/scriptBox.vue';
 
 let editor;
 export default {
