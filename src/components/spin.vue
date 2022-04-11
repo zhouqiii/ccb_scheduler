@@ -53,7 +53,7 @@ export default {
 <style lang="less" scoped>
   #spin-model {
     position: fixed;
-    left: 20px;
+    left: 28px;
     top: 60px;
     background: #fff;
     z-index: 99;
@@ -80,7 +80,7 @@ export default {
     height: calc(100% - 60px);
   }
   .spin-sp2 {
-    width: calc(100% - 220px);
+    width: calc(100% - 60px);
     height: calc(100% - 60px);
     left: 220px;
   }
