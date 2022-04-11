@@ -31,7 +31,141 @@
           "data": []
         },
         "viewTree": {
-          "data": []
+          "data": {
+            "name": "DAG",
+            "type": "",
+            "instances": [
+              {
+                "id":737,
+                "name":"交易路径数据",
+                "type":"",
+                "state":"SUCCESS",
+                "startTime":"2022-02-07 04:00:00",
+                "endTime":"2022-02-07 04:03:23",
+                "host":"128.106.190:8081",
+                "duration":"00 00:03:23",
+                "subflowId":0
+              },{
+                "id":711,
+                "name":"交易路径数据-5",
+                "type":"",
+                "state":"SUCCESS",
+                "startTime":"2022-02-07 04:00:00",
+                "endTime":"2022-02-07 04:03:23",
+                "host":"128.106.190:8081",
+                "duration":"00 00:03:23",
+                "subflowId":0
+              },{
+                "id":725,
+                "name":"交易路径数据-2",
+                "type":"",
+                "state":"SUCCESS",
+                "startTime":"2022-02-07 04:00:00",
+                "endTime":"2022-02-07 04:03:23",
+                "host":"128.106.190:8081",
+                "duration":"00 00:03:23",
+                "subflowId":0
+              },{
+                "id":733,
+                "name":"交易路径数据-1",
+                "type":"",
+                "state":"SUCCESS",
+                "startTime":"2022-02-07 04:00:00",
+                "endTime":"2022-02-07 04:03:23",
+                "host":"128.106.190:8081",
+                "duration":"00 00:03:23",
+                "subflowId":0
+              }
+            ],
+            "children": [{
+              "name": "orancle2orancle",
+              "type": "SHELL",
+              "instances": [
+                {
+                  "id":3364,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":2333,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":3345,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":3377,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":3326,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":2399,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":3388,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                },{
+                  "id":3363,
+                  "name":"orancle2orancle",
+                  "type":"SHELL",
+                  "state":"SUCCESS",
+                  "startTime":"2022-02-07 04:00:00",
+                  "endTime":"2022-02-07 04:03:23",
+                  "host":"128.106.190:8081",
+                  "duration":"00 00:03:23",
+                  "subflowId":0
+                }
+              ],
+              "children":[]
+            }]
+          }
         },
         "viewGantt": {
           "data": {

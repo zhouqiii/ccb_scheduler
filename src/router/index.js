@@ -19,6 +19,11 @@ const routes = [
     name: 'gantt',
     component: () => import(/* webpackChunkName: "view" */ '../views/ganttView.vue'),
   },
+  {
+    path: '/tree',
+    name: 'tree',
+    component: () => import(/* webpackChunkName: "view" */ '../views/treeView.vue'),
+  },
 ];
 
 const router = new VueRouter({

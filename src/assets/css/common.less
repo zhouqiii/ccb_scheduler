@@ -89,6 +89,37 @@ body{
 }
 
 /*甘特图页面样式结束*/
+/*树形图样式开始*/
+.d3-tree {
+  padding-left: 30px;
+  .node {
+    text {
+      font: 11px sans-serif;
+      pointer-events: none;
+    }
+  }
+  rect {
+    cursor: pointer;
+    &.state {
+      stroke: #666;
+      shape-rendering: crispEdges;
+    }
+  }
+  path {
+    &.link{
+      fill: none;
+      stroke: #666;
+      stroke-width: 2px;
+    }
+  }
+  circle {
+    stroke: #666;
+    fill: #0097e0;
+    stroke-width: 1.5px;
+    cursor: pointer;
+  }
+}
+/*树形图样式结束*/
 /*tooltip样式定制开始*/
 .ui-helper-hidden-accessible{//使用jq-ui的tooltip时弹出定制tooltip时会在页面底部重复出现弹框的内容，这一行使错误出现的tooltip不显示
   display: none;
