@@ -34,7 +34,50 @@
           "data": []
         },
         "viewGantt": {
-          "data": []
+          "data": {
+            "height": 0,
+            "tasks": [
+              {
+                "taskName": "getSrcTbl",
+                "startDate": [1646366337000],
+                "endDate": [1646366531000],
+                "executionDate": "2022-03-04T11:58:57",
+                "isoStart": "2022-03-04T11:58:57",
+                "isoEnd": "2022-03-04T12:02:11",
+                "status": "SUCCESS",
+                "duration": "00 00:03:14"
+              },{
+                "taskName": "import_srctbl_data",
+                "startDate": [1646366469000],
+                "endDate": [1646366542000],
+                "executionDate": "2022-03-04T11:58:57",
+                "isoStart": "2022-03-04T12:01:09",
+                "isoEnd": "2022-03-04T12:02:22",
+                "status": "SUCCESS",
+                "duration": "00 00:03:13"
+              },{
+                "taskName": "start_dwd_srctbl",
+                "startDate": [1646366480000],
+                "endDate": [1646366671000],
+                "executionDate": "2022-03-04T11:58:57",
+                "isoStart": "2022-03-04T12:01:20",
+                "isoEnd": "2022-03-04T12:04:31",
+                "status": "SUCCESS",
+                "duration": "00 00:03:11"
+              },{
+                "taskName": "start_ads_srctbl",
+                "startDate": [1646366609000],
+                "endDate": [1646367009000],
+                "executionDate": "2022-03-04T12:03:29",
+                "isoStart": "2022-03-04T12:03:29",
+                "isoEnd": "2022-03-04T12:10:09",
+                "status": "SUCCESS",
+                "duration": "00 00:06:40"
+              }
+            ],
+            "taskNames":["getSrcTbl","import_srctbl_data","start_dwd_srctbl","start_ads_srctbl"],
+            "taskStatus": {"success": "success"}
+          }
         },
         "notifyGroupList": {
           "data": []

@@ -12,7 +12,12 @@ const routes = [
   {
     path: '/log',
     name: 'log',
-    component: () => import(/* webpackChunkName: "logView" */ '../views/logView.vue'),
+    component: () => import(/* webpackChunkName: "view" */ '../views/logView.vue'),
+  },
+  {
+    path: '/gantt',
+    name: 'gantt',
+    component: () => import(/* webpackChunkName: "view" */ '../views/ganttView.vue'),
   },
 ];
 

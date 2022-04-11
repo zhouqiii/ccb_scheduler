@@ -53,3 +53,60 @@ body{
 		}
 	}
 }
+/*甘特图页面样式开始*/
+.gantt-model {
+	rect {
+		cursor: pointer;
+  }
+	path {
+		&.link{
+			fill: none;
+			stroke: #666;
+			stroke-width: 2px;
+		}
+	}
+  g.tick line{
+    shape-rendering: crispEdges;
+  }
+  .axis {
+    path,line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+    text {
+      font: 11px sans-serif;
+    }
+  }
+  circle {
+    stroke: #666;
+    fill: #0097e0;
+    stroke-width: 1.5px;
+  }
+  g.axis path {
+    shape-rendering: crispEdges;
+  }
+}
+
+/*甘特图页面样式结束*/
+/*tooltip样式定制开始*/
+.ui-helper-hidden-accessible{//使用jq-ui的tooltip时弹出定制tooltip时会在页面底部重复出现弹框的内容，这一行使错误出现的tooltip不显示
+  display: none;
+}
+.ui-tooltip{
+  line-height: 1.5 !important;
+	opacity: .9 !important;
+  padding: 3px 8px !important;
+  color: #fff !important;
+  text-align: center !important;
+  background: #000 !important;
+  border-radius: 4px !important;
+}
+.ui-widget{
+  font-size: 12px !important;
+}
+.ui-widget.ui-widget-content{
+  border:none !important;
+  -webkit-box-shadow: none
+}
+/*tooltip样式定制结束*/
