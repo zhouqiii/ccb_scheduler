@@ -12,8 +12,8 @@
         <div>
           <i class="el-icon-download"></i>
           <i class="el-icon-refresh" @click="refreshLog"></i>
-          <i class="el-icon-full-screen" v-if="isScreen" @click="screenOpen"></i>
-          <i class="el-icon-rank" v-if="!isScreen" @click="screenClose"></i>
+          <i class="el-icon-full-screen" v-if="isScreen" @click="screenClose"></i>
+          <i class="el-icon-rank" v-if="!isScreen" @click="screenOpen"></i>
         </div>
       </div>
       <div class="content">
@@ -105,7 +105,7 @@ export default {
         top: '20px',
       });
       $logBoxBody.css({
-        height: '460px',
+        height: '400px',
       });
       $logBox.find('.content').animate({ scrollTop: 0 }, 0);
       // Handling text field size
