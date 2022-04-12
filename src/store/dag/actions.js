@@ -447,19 +447,6 @@ export default {
 //   },
 //
 //   /**
-//    * Get a list of process definitions (list page usage with pagination)
-//    */
-//   getProcessListP ({ state }, payload) {
-//     return new Promise((resolve, reject) => {
-//       io.get(`projects/${state.projectName}/process/list-paging`, payload, res => {
-//         resolve(res.data)
-//       }).catch(res => {
-//         reject(res)
-//       })
-//     })
-//   },
-//
-//   /**
 //    * Get a list of process definitions by project id
 //    */
 //   getProcessByProjectId ({ state }, payload) {

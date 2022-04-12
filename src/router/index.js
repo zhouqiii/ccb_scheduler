@@ -24,6 +24,11 @@ const routes = [
     name: 'tree',
     component: () => import(/* webpackChunkName: "view" */ '../views/treeView.vue'),
   },
+  {
+    path: '/dag/definition',
+    name: 'dag/definition',
+    component: () => import(/* webpackChunkName: "dag" */ '../views/Dag/create.vue'),
+  },
 ];
 
 const router = new VueRouter({

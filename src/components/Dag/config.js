@@ -1,56 +1,38 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-// const toolOper = (dagThis) => {
-//   const disabled = !!dagThis.$store.state.dag.isDetails
-// Permissions.getAuth() === false ? false : !dagThis.$store.state.dag.isDetails
-//   return [
-//     {
-//       code: 'pointer',
-//       icon: 'ans-icon-pointer',
-//       disable: disabled,
-//       desc: '${i18n.$t('Drag Nodes and Selected Items')}'
-//     },
-//     {
-//       code: 'line',
-//       icon: 'ans-icon-slash',
-//       disable: disabled,
-//       desc: '${i18n.$t('Select Line Connection')}'
-//     },
-//     {
-//       code: 'remove',
-//       icon: 'ans-icon-trash',
-//       disable: disabled,
-//       desc: '${i18n.$t('Delete selected lines or nodes')}'
-//     },
-//     {
-//       code: 'download',
-//       icon: 'ans-icon-download',
-//       disable: !dagThis.type,
-//       desc: '${i18n.$t('Download')}'
-//     },
-//     {
-//       code: 'screen',
-//       icon: 'ans-icon-max',
-//       disable: false,
-//       desc: '${i18n.$t('Full Screen')}'
-//     }
-//   ]
-// }
+const toolOper = (dagThis) => {
+  const disabled = !!dagThis.$store.state.dag.isDetails;
+  return [
+    {
+      code: 'pointer',
+      icon: 'el-icon-top-left',
+      disable: disabled,
+      desc: '拖动结点和选中项',
+    },
+    {
+      code: 'line',
+      icon: 'el-icon-sort',
+      disable: disabled,
+      desc: '选择线条连接',
+    },
+    {
+      code: 'remove',
+      icon: 'el-icon-delete',
+      disable: disabled,
+      desc: '删除选中的线或结点',
+    },
+    {
+      code: 'download',
+      icon: 'el-icon-download',
+      disable: !dagThis.type,
+      desc: '下载',
+    },
+    {
+      code: 'screen',
+      icon: 'el-icon-rank',
+      disable: false,
+      desc: '全屏',
+    },
+  ];
+};
 //
 // /**
 //  * Post status
@@ -286,7 +268,7 @@ const tasksType = {
 };
 
 export {
-  // toolOper,
+  toolOper,
   // publishStatus,
   // runningType,
   tasksState,
